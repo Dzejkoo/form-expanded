@@ -1,0 +1,19 @@
+<main>
+    <div class="top-bar">
+
+    </div>
+    <section>
+        <button *ngIf="collapsed" (click)="expand()">Expand</button>
+        <button *ngIf="!collapsed" (click)="collapse()">Collapse</button>
+    </section>
+    <section class="collapsible" [@collapse]="collapsed">
+        <div class="collapsible__form">
+            <label>Samochód</label>
+            <input type="text">
+        </div>
+    </section>
+</main>
+
+<aside>
+
+</aside>
