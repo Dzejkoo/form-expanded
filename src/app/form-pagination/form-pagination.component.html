@@ -1,16 +1,43 @@
 <main>
-    <div class="top-bar">
-
-    </div>
     <section>
         <button *ngIf="collapsed" (click)="expand()">Expand</button>
         <button *ngIf="!collapsed" (click)="collapse()">Collapse</button>
     </section>
     <section class="collapsible" [@collapse]="collapsed">
-        <div class="collapsible__form">
-            <label>Samochód</label>
-            <input type="text">
+        <div class="collapsible__chips">
+
         </div>
+        <form (ngSubmit)="onSubmit()" [formGroup]="formGroup">
+            <div class="chips">
+                <span class="chips__el" *ngFor="let car of cars; let i = index">{{car}}<span class="cancel"
+                        (click)="delete(i)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M2.25106 2.25105C2.58579 1.91632 3.1285 1.91632 3.46324 2.25105L8.00001 6.78782L12.5368 2.25105C12.8715 1.91632 13.4142 1.91632 13.7489 2.25105C14.0837 2.58579 14.0837 3.1285 13.7489 3.46323L9.21219 8L13.7489 12.5368C14.0837 12.8715 14.0837 13.4142 13.7489 13.7489C13.4142 14.0837 12.8715 14.0837 12.5368 13.7489L8.00001 9.21218L3.46323 13.7489C3.1285 14.0837 2.58579 14.0837 2.25105 13.7489C1.91632 13.4142 1.91632 12.8715 2.25105 12.5368L6.78782 8L2.25106 3.46323C1.91632 3.1285 1.91632 2.58579 2.25106 2.25105Z"
+                                fill="#4D5061" />
+                        </svg>
+                    </span></span>
+            </div>
+            <div class="collapsible__form" [ngSwitch]="step">
+                <select class="select" formControlName="model" *ngSwitchCase="1" (change)="nextStep($event)">
+                    <option value="" disabled selected>Model</option>
+                    <option *ngFor="let model of models" [value]="model">{{model}}</option>
+                </select>
+                <select class="select" formControlName="chips" *ngSwitchCase="2" (change)="nextStep($event)">
+                    <option value="" disabled selected> Dor</option>
+                    <option *ngFor="let dor of dors" [value]="dor">{{dor}}</option>
+                </select>
+                <select class="select" formControlName="chips" *ngSwitchCase="3" (change)="nextStep($event)">
+                    <option value="" disabled selected> Price</option>
+                    <option *ngFor="let price of prices" [value]="price">{{price}}</option>
+                </select>
+                <select class="select" formControlName="chips" *ngSwitchCase="4" (change)="nextStep($event)">
+                    <option value="" disabled selected> Type</option>
+                    <option *ngFor="let type of types" [value]="type">{{type}}</option>
+                </select>
+            </div>
+            <button type="submit" class="collapsible__button">Dodaj</button>
+        </form>
     </section>
 </main>
 

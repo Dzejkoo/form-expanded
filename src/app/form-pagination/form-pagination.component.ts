@@ -7,6 +7,7 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
+import { FormControl, FormGroup } from '@angular/forms';
 const DEFAULT_DURATION = 300;
 
 @Component({
@@ -24,6 +25,27 @@ const DEFAULT_DURATION = 300;
 })
 export class FormPaginationComponent {
   collapsed = false;
+  cars: string[] = [];
+  step: number = 1;
+  dors = ['1', '2', '3', '4', '5'];
+  models = ['Peugeot', 'BMW', 'Merceds'];
+  prices = ['200', '300', '400'];
+  types = ['sedan', 'cabriolet', 'mini'];
+  formGroup = new FormGroup({
+    chips: new FormControl(''),
+    model: new FormControl(''),
+  });
+
+  delete(index: number) {
+    this.cars.splice(index, 1);
+  }
+
+  nextStep(event: any) {
+    this.cars.push(event.target.value);
+    this.step = this.step + 1;
+  }
+
+  onSubmit() {}
 
   toggle() {
     this.collapsed = !this.collapsed;
